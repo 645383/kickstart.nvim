@@ -237,9 +237,9 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
-
+vim.wo.relativenumber = true
 -- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = 'i'
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -457,7 +457,14 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
+  solargraph = {
+    -- never works!!
+    useBundler = true,
+    root_dir = vim.fs.dirname(vim.fs.find({'Gemfile', '.git', '.'}, { upward = true })[1]),
+    diagnostics = true,
+    formatting = true,
+    cmd = {"bundle", "exec", "solargraph", "stdio"},
+  },
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
