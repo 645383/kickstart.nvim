@@ -1,0 +1,7 @@
+{
+  "[ruby]": { "coc.preferences.formatOnSave": true},
+  "solargraph.autoformat": true,
+  "solargraph.diagnostics": true,
+  "solargraph.formatting": true
+}
+

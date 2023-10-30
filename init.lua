@@ -60,6 +60,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 vim.opt.guicursor="n:blinkon5"
 
+-- vim.opt.foldenable = false
 vim.diagnostic.handlers.underline = 'hide'
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
@@ -323,7 +324,8 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-
+vim.keymap.set('n', '<leader>fg', require("telescope").extensions.live_grep_args.live_grep_args, { noremap = true })
+vim.keymap.set("n", "<leader>gc", require("telescope-live-grep-args.shortcuts").grep_word_under_cursor)
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
