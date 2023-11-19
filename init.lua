@@ -42,6 +42,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+require 'custom.init'
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -58,9 +59,8 @@ if not vim.loop.fs_stat(lazypath) then
   }
 end
 vim.opt.rtp:prepend(lazypath)
-vim.opt.guicursor="n:blinkon5"
 
--- vim.opt.foldenable = false
+vim.opt.foldenable = false
 vim.diagnostic.handlers.underline = 'hide'
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
@@ -176,8 +176,8 @@ require('lazy').setup({
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
-    -- main = "ibl",
-    -- opts = {},
+    main = "ibl",
+    opts = {},
   },
 
   -- "gc" to comment visual regions/lines
@@ -483,7 +483,7 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {},
   tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs'} },
   solargraph = {
