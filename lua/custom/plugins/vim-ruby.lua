@@ -1,1 +1,1 @@
-return {'tpope/vim-ruby'}
+return {'vim-ruby/vim-ruby'}

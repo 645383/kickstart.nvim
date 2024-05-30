@@ -17,6 +17,8 @@ local keymap = vim.keymap.set
 --   command_mode = "c",
 
 -- Normal --
+-- copy relative path with lineno to clipboard
+keymap("n", "<leader>l", ":call setreg('+', expand('%:.') .. ':' .. line('.'))<CR>", { noremap = true, silent = true })
 
 keymap("n", "<leader>oo", ":only<CR>", opts)
 -- Better window navigation

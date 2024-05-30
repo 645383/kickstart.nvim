@@ -61,8 +61,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.opt.foldenable = false
-vim.diagnostic.handlers.underline = 'hide'
 -- [[ Configure plugins ]]
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
@@ -456,7 +454,7 @@ vim.defer_fn(function()
     ignore_install = {},
     -- You can specify additional Treesitter modules here: -- For example: -- playground = {--enable = true,-- },
     modules = {},
-    highlight = { enable = true },
+    highlight = { enable = true ,     disable = { "c", "cpp", "vimdoc", 'vim' }},
     indent = { enable = true },
     incremental_selection = {
       enable = true,
