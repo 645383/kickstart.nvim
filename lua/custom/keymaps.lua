@@ -21,6 +21,7 @@ local keymap = vim.keymap.set
 keymap('n', '<leader>l', ":call setreg('+', expand('%:.') .. ':' .. line('.'))<CR>", { noremap = true, silent = true })
 
 keymap('n', '<leader>oo', ':only<CR>', opts)
+keymap('n', '<S-q>', ':q<CR>', opts)
 
 -- Resize with arrows
 keymap('n', '<C-Up>', ':resize -2<CR>', opts)
