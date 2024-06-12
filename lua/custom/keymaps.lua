@@ -17,6 +17,12 @@ local keymap = vim.keymap.set
 --   command_mode = "c",
 
 -- Normal --
+
+keymap('n', '<leader>cbo', function()
+  require('CopilotChat').ask(vim.fn.input 'Quick Chat: ', { selection = require('CopilotChat.select').buffer })
+end, { noremap = true, silent = true, desc = 'Quick Chat with Copilot (buffer)' })
+keymap('n', '<leader>co', ':CopilotChatOpen<CR>', opts)
+keymap('v', '<leader>co', ':CopilotChatOptimize<CR>', opts)
 -- copy relative path with lineno to clipboard
 keymap('n', '<leader>l', ":call setreg('+', expand('%:.') .. ':' .. line('.'))<CR>", { noremap = true, silent = true })
 
