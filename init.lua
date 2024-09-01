@@ -383,6 +383,22 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>si', function()
+        local path = vim.fn.input 'Enter directory path: '
+        require('telescope.builtin').find_files { cwd = path }
+      end, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>fh', function()
+        builtin.find_files {
+          hidden = true,
+        }
+      end, { desc = '[F]ind [H]idden' })
+      vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = '[S]earch [G]it files' })
+      vim.keymap.set('n', '<leader>fi', function()
+        builtin.find_files {
+          find_command = { 'rg', '--files', '--hidden', '--no-ignore', '--glob', '!.git' },
+        }
+      end, { desc = '[F]ind [I]nside' })
+
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -574,8 +590,9 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        ruby_ls = {},
+        -- ruby_ls = {},
         solargraph = {},
+        yamlls = {},
 
         -- clangd = {},
         -- gopls = {},
@@ -587,8 +604,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
-        --
+        tsserver = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -601,6 +617,36 @@ require('lazy').setup({
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+        emmet_ls = {},
+        cssls = {},
+        jsonls = {},
+        vls = {
+          settings = {
+            vetur = {
+              validation = {
+                template = true,
+                style = true,
+                script = true,
+              },
+              completion = {
+                autoImport = true,
+                useScaffoldSnippets = true,
+              },
+              format = {
+                defaultFormatter = {
+                  js = 'eslint',
+                  ts = 'prettier',
+                  html = 'prettier',
+                  css = 'prettier',
+                  scss = 'prettier',
+                  less = 'prettier',
+                  stylus = 'stylus-supremacy',
+                  postcss = 'prettier',
+                },
+              },
             },
           },
         },
@@ -669,7 +715,10 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        -- javascript = { { 'prettierd', 'prettier' } },
+        -- json = { { 'prettierd', 'prettier' } },
+        eruby = { { 'erb_format' } },
+        html = { { 'erb_format', 'htmlbeautifier' } },
       },
     },
   },

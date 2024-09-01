@@ -17,17 +17,32 @@ local keymap = vim.keymap.set
 --   command_mode = "c",
 
 -- Normal --
-
-keymap('n', '<leader>cbo', function()
-  require('CopilotChat').ask(vim.fn.input 'Quick Chat: ', { selection = require('CopilotChat.select').buffer })
-end, { noremap = true, silent = true, desc = 'Quick Chat with Copilot (buffer)' })
+-- copy relative path to current file to clipboard
+keymap('n', '<leader>p', ":let @+=expand('%:p:.')<CR>", opts)
+-- copy relative path with line number to current file to clipboard
+keymap('n', '<leader>lp', ":let @+=expand('%').':'.line('.')<CR>", opts)
+-- copy path to current file to clipboard
+keymap('n', '<leader>P', ":let @+=expand('%:p')<CR>", opts)
+-- CopilotChat
 keymap('n', '<leader>co', ':CopilotChatOpen<CR>', opts)
 keymap('v', '<leader>co', ':CopilotChatOptimize<CR>', opts)
--- copy relative path with lineno to clipboard
-keymap('n', '<leader>l', ":call setreg('+', expand('%:.') .. ':' .. line('.'))<CR>", { noremap = true, silent = true })
-
+keymap('n', '<leader>ccq', function()
+  local input = vim.fn.input 'Quick Chat: '
+  if input ~= '' then
+    require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
+  end
+end, { desc = 'CopilotChat - Quick chat' })
+keymap('n', '<leader>ccs', function()
+  local actions = require 'CopilotChat.actions'
+  require('CopilotChat.integrations.telescope').pick(actions.help_actions())
+end, { desc = 'CopilotChat - Help actions' })
+keymap('n', '<leader>ccp', function()
+  local actions = require 'CopilotChat.actions'
+  require('CopilotChat.integrations.telescope').pick(actions.prompt_actions())
+end, { desc = 'CopilotChat - Prompt actions' })
 keymap('n', '<leader>oo', ':only<CR>', opts)
 keymap('n', '<S-q>', ':q<CR>', opts)
+keymap('n', '<S-w>', ':w<CR>', opts)
 
 -- Resize with arrows
 keymap('n', '<C-Up>', ':resize -2<CR>', opts)
