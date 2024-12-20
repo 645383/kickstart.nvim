@@ -715,7 +715,7 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-      -- require('ruby-lsp').setup()
+
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
