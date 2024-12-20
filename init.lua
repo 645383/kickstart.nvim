@@ -89,6 +89,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.o.foldmethod = 'manual'
 
 require 'custom.init'
 -- Set to true if you have a Nerd Font installed and selected in the terminal
@@ -407,6 +408,11 @@ require('lazy').setup({
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'live_grep_args')
 
+      vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = true,
+        signs = true,
+        update_in_insert = false,
+      })
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
@@ -630,9 +636,10 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- ruby_ls = {},
+        -- ruby_lsp = {},
         solargraph = {},
         yamlls = {},
+        pyright = {},
 
         -- clangd = {},
         -- gopls = {},
@@ -644,7 +651,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        ts_ls = {},
         --
 
         lua_ls = {
@@ -708,7 +715,7 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
+      -- require('ruby-lsp').setup()
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
@@ -938,6 +945,8 @@ require('lazy').setup({
       statusline.section_location = function()
         return '%2l:%-2v'
       end
+
+      require('mini.splitjoin').setup()
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
