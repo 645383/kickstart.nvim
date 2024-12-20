@@ -17,6 +17,8 @@ local keymap = vim.keymap.set
 --   command_mode = "c",
 
 -- Normal --
+-- open new tab
+keymap('n', '<leader>tn', ':tabnew<CR>', opts)
 -- copy relative path to current file to clipboard
 keymap('n', '<leader>p', ":let @+=expand('%:p:.')<CR>", opts)
 -- copy relative path with line number to current file to clipboard
