@@ -45,12 +45,13 @@ end, { desc = 'CopilotChat - Prompt actions' })
 keymap('n', '<leader>oo', ':only<CR>', opts)
 keymap('n', '<S-q>', ':q<CR>', opts)
 keymap('n', '<S-w>', ':w<CR>', opts)
+keymap('n', '<leader>ww', ':noa w<CR>', opts)
 
 -- Resize with arrows
-keymap('n', '<C-Up>', ':resize -2<CR>', opts)
-keymap('n', '<C-Down>', ':resize +2<CR>', opts)
-keymap('n', '<C-Left>', ':vertical resize -2<CR>', opts)
-keymap('n', '<C-Right>', ':vertical resize +2<CR>', opts)
+keymap('n', '<C-Up>', ':resize -5<CR>', opts)
+keymap('n', '<C-Down>', ':resize +5<CR>', opts)
+keymap('n', '<C-Left>', ':vertical resize -5<CR>', opts)
+keymap('n', '<C-Right>', ':vertical resize +5<CR>', opts)
 
 -- Navigate buffers
 keymap('n', '<S-l>', ':bnext<CR>', opts)
@@ -62,8 +63,8 @@ keymap('n', '<A-j>', ':m .+1<CR>==', opts)
 
 -- Insert --
 -- Press jk fast to exit insert mode
-keymap('i', 'jk', '<ESC>', opts)
-keymap('i', 'kj', '<ESC>', opts)
+-- keymap('i', 'jk', '<ESC>', opts)
+-- keymap('i', 'kj', '<ESC>', opts)
 
 -- Visual --
 -- Stay in indent mode
